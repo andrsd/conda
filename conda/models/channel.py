@@ -220,7 +220,7 @@ class Channel(metaclass=ChannelType):
             cn = self.__canonical_name = join_url(self.location, self.name).lstrip("/")
             return cn
 
-    def urls(self, with_credentials=False, subdirs=None):
+    def urls(self, with_credentials=True, subdirs=None):
         if subdirs is None:
             subdirs = context.subdirs
 
@@ -278,7 +278,10 @@ class Channel(metaclass=ChannelType):
     def base_url(self):
         if self.canonical_name == UNKNOWN_CHANNEL:
             return None
-        return f"{self.scheme}://{join_url(self.location, self.name)}"
+        if self.auth:
+            return f"{self.scheme}://{self.auth}@{join_url(self.location, self.name)}"
+        else:
+            return f"{self.scheme}://{join_url(self.location, self.name)}"
 
     @property
     def base_urls(self):
