@@ -88,7 +88,7 @@ KNOWN_SUBDIRS = PLATFORM_DIRECTORIES = (
     "zos-z",
 )
 
-RECOGNIZED_URL_SCHEMES = ("http", "https", "ftp", "s3", "file")
+RECOGNIZED_URL_SCHEMES = ("http", "https", "ftp", "sftp", "s3", "file")
 
 
 DEFAULT_CHANNELS_UNIX = (

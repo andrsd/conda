@@ -32,6 +32,7 @@ from . import (
 )
 from .adapters.ftp import FTPAdapter
 from .adapters.http import HTTPAdapter
+from .adapters.sftp import SFTPAdapter
 from .adapters.localfs import LocalFSAdapter
 from .adapters.s3 import S3Adapter
 
@@ -44,6 +45,7 @@ CONDA_SESSION_SCHEMES = frozenset(
         "http",
         "https",
         "ftp",
+        "sftp",
         "s3",
         "file",
     )
@@ -179,6 +181,7 @@ class CondaSession(Session, metaclass=CondaSessionType):
             self.mount("http://", unused_adapter)
             self.mount("https://", unused_adapter)
             self.mount("ftp://", unused_adapter)
+            self.mount("sftp://", unused_adapter)
             self.mount("s3://", unused_adapter)
 
         else:
@@ -194,6 +197,7 @@ class CondaSession(Session, metaclass=CondaSessionType):
             self.mount("http://", http_adapter)
             self.mount("https://", http_adapter)
             self.mount("ftp://", FTPAdapter())
+            self.mount("sftp://", SFTPAdapter())
             self.mount("s3://", S3Adapter())
 
         self.mount("file://", LocalFSAdapter())
